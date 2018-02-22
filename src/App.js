@@ -12,7 +12,8 @@ class App extends Component {
           heading: 'Samosa Clickers',
           uname: '',
           email: '',
-          comp: 'game'
+          comp: 'game',
+          score: 0,
         }
 
         this.renderComp = this.renderComp(this);
@@ -20,16 +21,12 @@ class App extends Component {
         //this.addScore = this.addScore(this);
     }
 
-    renderComp = () => {
-        if(this.state.comp === 'start'){
-            return(<EntryForm change = {this.changeComp} render = {this.renderComp}/>);
-        }
-        else if(this.state.comp === 'game'){
-            return(<Game />);
-        }
-        else{
-            return(<Leaderboard/>);
-        }
+
+
+    setScore = (gameScore) => {
+        this.setState({
+            score: gameScore
+        })
     }
 
     changeComp = (comp, head) => {
@@ -38,6 +35,18 @@ class App extends Component {
             heading:  head
         });
         this.renderComp();
+    }
+
+    renderComp = () => {
+        if(this.state.comp === 'start'){
+            return(<EntryForm change = {this.changeComp} render = {this.renderComp}/>);
+        }
+        else if(this.state.comp === 'game'){
+            return(<Game setScore={this.setScore} />);
+        }
+        else{
+            return(<Leaderboard/>);
+        }
     }
     
     render(){

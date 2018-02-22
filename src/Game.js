@@ -13,8 +13,8 @@ class Game extends Component{
         this.increase = this.increase.bind(this);
 
         this.state= {
-            'score': 0,
-            'time': 60
+            'time': 60,
+            'gameScore': 0
         }
     }
 
@@ -24,8 +24,10 @@ class Game extends Component{
 
     addScore = () => {
         this.setState({
-            score: this.state.score + 1
-        });
+            'gameScore': this.state.gameScore + 1
+        })
+
+        this.props.setScore(this.state.gameScore);
       }
 
     increase = () => {
@@ -42,7 +44,7 @@ class Game extends Component{
     render(){
         return(
             <div className="gameComp">
-                <p className="score">{this.state.score}</p>
+                <p className="score">{this.state.gameScore}</p>
                 <p className="time"> Samosas Made</p>
                 <div className="samosa" onClick={this.addScore}/>
                 <p className="time">{this.state.time} secs</p>        

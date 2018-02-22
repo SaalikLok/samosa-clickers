@@ -1,0 +1,118 @@
+//Fonts
+@import url('https://fonts.googleapis.com/css?family=Pacifico|Quicksand');
+$heading: 'Pacifico', cursive;
+$body: 'Quicksand', sans-serif;
+
+//Colors
+$white: #ffffff;
+$black: #000000;
+$blue: #0073BB;
+$lightBlue: #8BD2FF;
+$yellow: #FFB366;
+
+//Mixins
+@mixin box-shadow($top, $left, $blur, $color, $inset:"") {
+
+    -webkit-box-shadow:$top $left $blur $color #{$inset};
+    -moz-box-shadow:$top $left $blur $color #{$inset};
+    box-shadow:$top $left $blur $color #{$inset};
+  }
+
+//Styles
+body{
+    text-align: center;
+    color: $white;
+    font-family: $body;
+    background: radial-gradient($lightBlue, $blue);
+    height: 100vh;
+    width: 100vw;
+    margin-left: 0px;
+}
+
+h1{
+    margin-top: 4vh;
+    font-family: $heading;
+    font-size: 3em;
+}
+
+input{
+    font-size: 1.3em;
+    margin-bottom: 5vh;
+    font-family: $body;
+    width: 300px;
+}
+
+button{
+    border: 0 solid;
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0);
+    outline: 1px solid;
+    outline-color: rgba(255, 255, 255, .5);
+    outline-offset: 0px;
+    text-shadow: none;
+    transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
+    font-size: 1.7em;
+    padding: 0.5em 0.9em 0.5em 0.9em;
+    background-color: $blue;
+    color: $white;
+    cursor: pointer;
+    @include box-shadow(0, 0, 20px, rgba(255, 255, 255, 0), inset);
+    font-family: $body;
+}
+
+button:hover{
+    border: 1px solid;
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, .5), 0 0 20px rgba(255, 255, 255, .2);
+    outline-color: rgba(255, 255, 255, 0);
+    outline-offset: 15px;
+}
+
+.gameComp{
+    margin-top: 10vh;
+}
+
+.score{
+    font-size: 3em;
+    margin-bottom: 3px;
+}
+
+.time{
+    font-size: 1.5em;
+}
+
+.samosa{
+    background: url('../img/SamosaIcon.png') center no-repeat;
+    width: 250px;
+    height: 200px;
+    cursor: pointer;
+    margin: 0 auto;
+}
+
+.leaderboard{
+    margin-left: 15vw;
+    margin-right: 15vw;
+}
+
+%lBar{
+    height: 30px;
+    background: $yellow;
+    border-top-right-radius: 2em;
+    border-bottom-right-radius: 2em;
+    margin-top: 20px;
+    font-size: 20px;
+    color: $blue;
+}
+
+.lBar100{
+    @extend %lBar;
+    width: 100%;
+}
+
+.lBar75{
+    @extend %lBar;
+    width: 75%;
+}
+
+.lBar50{
+    @extend %lBar;
+    width: 50%;
+}

@@ -13,17 +13,36 @@ class EntryForm extends Component{
         this.props.change("game", "Samosa Clickers");
     }
 
+    createUser(event){
+        event.preventDefault();
+
+        if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,4})+$/.test(this.email.value)){
+            const user = {
+                uname: this.uname.value.trim(),
+                email: this.email.value.trim(),
+                score: 0,
+            };
+            this.props.addUser(user);
+            this.playGame(user);
+        }
+        else{
+            alert("incorrect email.")
+        }
+    }
+
     render(){
         return(
-            <div className="formArea">
-                <h4>Play the game where you click on the samosa as many times as possible in a minute.</h4>
-                <h3>Ready to play? Fill out the form and let's gooo!</h3>
+            <div className="formArea" onSubmit={(e) => this.createUser(e)}>
+                <h3>Click on the samosa as many times as possible in a minute!</h3>
                 <p>Played before? Use the same email and your high score will update.</p>
-                <input type="text" placeholder="Name"/>
-                <br/>
-                <input type="text" placeholder="Email"/>
-                <br/>
-                <button onClick={this.playGame}>Play</button>
+                <form>
+                    <input ref={(input) => this.uname = input}  type="text" placeholder="Name"/>
+                    <br/>
+                    <input ref={(input) => this.email = input} type="text" placeholder="Email"/>
+                    <br/>
+                    <button type="submit">Play</button>
+                </form>
+                
             </div>
         );
     }   

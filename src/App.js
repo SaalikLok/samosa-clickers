@@ -10,23 +10,28 @@ class App extends Component {
     
         this.state = {
           heading: 'Samosa Clickers',
-          uname: '',
-          email: '',
-          comp: 'game',
-          score: 0,
+          users: {},
+          comp: 'start',
         }
 
-        this.renderComp = this.renderComp(this);
+        this.addUser = this.addUser.bind(this);
         //this.changeComp = this.changeComp(this);
         //this.addScore = this.addScore(this);
     }
 
+    addUser(users){
+        //const users = {...this.state.users};
+        this.setState({ users });
+    }
 
 
     setScore = (gameScore) => {
-        this.setState({
-            score: gameScore
-        })
+        this.setState(prevState => ({
+            users:{
+                ...prevState.users,
+                score: gameScore
+            }
+        }))
     }
 
     changeComp = (comp, head) => {
@@ -34,26 +39,25 @@ class App extends Component {
             comp: comp,
             heading:  head
         });
-        this.renderComp();
-    }
-
-    renderComp = () => {
-        if(this.state.comp === 'start'){
-            return(<EntryForm change = {this.changeComp} render = {this.renderComp}/>);
-        }
-        else if(this.state.comp === 'game'){
-            return(<Game setScore={this.setScore} />);
-        }
-        else{
-            return(<Leaderboard/>);
-        }
     }
     
     render(){
+        let compToRender = null;
+
+        if(this.state.comp === 'start'){
+            compToRender = <EntryForm change={this.changeComp} addUser={this.addUser}/>; 
+        }
+        else if(this.state.comp === 'game'){
+           compToRender = <Game setScore={this.setScore} change={this.changeComp}/>;
+        }
+        else{
+            compToRender = <Leaderboard users={this.state.users}/>;
+        }
+
         return(
         <div className="App" ref="myRef">
             <h1>{this.state.heading}</h1>
-            {this.renderComp}
+            {compToRender}
         </div>
         );
     }

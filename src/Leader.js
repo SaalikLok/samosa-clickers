@@ -14,13 +14,14 @@ class Leader extends Component{
     }
     
     setLength(){
-        return 1;
+        let bar = document.getElementById("lbar");
+        bar.length = this.props.length;
     }
 
     render(){
         return(
             <div id="lbar">
-
+                <p>{this.props.name} : {this.props.score}</p>
             </div>
         );
     }

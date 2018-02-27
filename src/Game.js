@@ -13,7 +13,7 @@ class Game extends Component{
         this.increase = this.increase.bind(this);
 
         this.state= {
-            'time': 60,
+            'time': 30,
             'gameScore': 0
         }
     }
@@ -29,6 +29,10 @@ class Game extends Component{
 
         this.props.setScore(this.state.gameScore);
       }
+    
+    goToLeader = () => {
+        this.props.change("leaderboard", "Leaderboard")
+    }
 
     increase = () => {
         if (this.state.time > 0){
@@ -37,7 +41,7 @@ class Game extends Component{
             });
         }
         else{
-            alert("TIME UP!");
+            this.goToLeader()
         }
     }
 

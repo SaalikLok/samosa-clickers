@@ -15,7 +15,6 @@ class App extends Component {
           score: 0,
         }
 
-        this.compRender = this.compRender.bind(this);
         this.addUser = this.addUser.bind(this);
         //this.changeComp = this.changeComp(this);
         //this.addScore = this.addScore(this);
@@ -41,24 +40,28 @@ class App extends Component {
         this.renderComp();
     }
 
-//TODO: FIX THE WAY THAT THESE COMPONENTS RENDER
+    
     compRender = () => {
-        if(this.state.comp === 'start'){
-            <EntryForm change = {this.changeComp} render = {this.renderComp}/>
-        }
-        else if(this.state.comp === 'game'){
-            <Game setScore={this.setScore} />
-        }
-        else{
-            <Leaderboard/>
-        }
+        
     }
     
     render(){
+        let compToRender = null;
+
+        if(this.state.comp === 'start'){
+            compToRender = <EntryForm change ={this.changeComp} render ={this.renderComp}/>; 
+        }
+        else if(this.state.comp === 'game'){
+           compToRender = <Game setScore={this.setScore} />;
+        }
+        else{
+            compToRender =  <Leaderboard/>;
+        }
+
         return(
         <div className="App" ref="myRef">
             <h1>{this.state.heading}</h1>
-            {this.compRender}
+            {compToRender}
         </div>
         );
     }

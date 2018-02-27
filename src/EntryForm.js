@@ -15,13 +15,18 @@ class EntryForm extends Component{
 
     createUser(event){
         event.preventDefault();
-        console.log("user is created.");
-        const user = {
-            uname: this.uname.value,
-            email: this.email.value,
-            score: 0,
+
+        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email.value)){
+            const user = {
+                uname: this.uname.value,
+                email: this.email.value,
+                score: 0,
+            };
+            this.playGame();
         }
-        console.log(user);
+        else{
+            alert("incorrect email.")
+        }
     }
 
     render(){

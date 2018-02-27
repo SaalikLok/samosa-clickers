@@ -37,12 +37,6 @@ class App extends Component {
             comp: comp,
             heading:  head
         });
-        this.renderComp();
-    }
-
-    
-    compRender = () => {
-        
     }
     
     render(){
@@ -52,7 +46,7 @@ class App extends Component {
             compToRender = <EntryForm change ={this.changeComp} render ={this.renderComp}/>; 
         }
         else if(this.state.comp === 'game'){
-           compToRender = <Game setScore={this.setScore} />;
+           compToRender = <Game setScore={this.setScore} change ={this.changeComp}/>;
         }
         else{
             compToRender =  <Leaderboard/>;

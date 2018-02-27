@@ -16,13 +16,14 @@ class EntryForm extends Component{
     createUser(event){
         event.preventDefault();
 
-        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email.value)){
+        if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,4})+$/.test(this.email.value)){
             const user = {
-                uname: this.uname.value,
-                email: this.email.value,
+                uname: this.uname.value.trim(),
+                email: this.email.value.trim(),
                 score: 0,
             };
-            this.playGame();
+            this.props.addUser(user);
+            this.playGame(user);
         }
         else{
             alert("incorrect email.")
@@ -32,8 +33,7 @@ class EntryForm extends Component{
     render(){
         return(
             <div className="formArea" onSubmit={(e) => this.createUser(e)}>
-                <h4>Play the game where you click on the samosa as many times as possible in a minute.</h4>
-                <h3>Ready to play? Fill out the form and let's gooo!</h3>
+                <h3>Click on the samosa as many times as possible in a minute!</h3>
                 <p>Played before? Use the same email and your high score will update.</p>
                 <form>
                     <input ref={(input) => this.uname = input}  type="text" placeholder="Name"/>

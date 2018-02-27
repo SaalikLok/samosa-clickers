@@ -12,7 +12,6 @@ class App extends Component {
           heading: 'Samosa Clickers',
           users: {},
           comp: 'start',
-          score: 0,
         }
 
         this.addUser = this.addUser.bind(this);
@@ -20,16 +19,19 @@ class App extends Component {
         //this.addScore = this.addScore(this);
     }
 
-    addUser(user){
-        const users = {...this.state.users};
+    addUser(users){
+        //const users = {...this.state.users};
         this.setState({ users });
     }
 
 
     setScore = (gameScore) => {
-        this.setState({
-            score: gameScore
-        })
+        this.setState(prevState => ({
+            users:{
+                ...prevState.users,
+                score: gameScore
+            }
+        }))
     }
 
     changeComp = (comp, head) => {
@@ -43,13 +45,13 @@ class App extends Component {
         let compToRender = null;
 
         if(this.state.comp === 'start'){
-            compToRender = <EntryForm change ={this.changeComp} render ={this.renderComp}/>; 
+            compToRender = <EntryForm change={this.changeComp} addUser={this.addUser}/>; 
         }
         else if(this.state.comp === 'game'){
-           compToRender = <Game setScore={this.setScore} change ={this.changeComp}/>;
+           compToRender = <Game setScore={this.setScore} change={this.changeComp}/>;
         }
         else{
-            compToRender =  <Leaderboard/>;
+            compToRender = <Leaderboard users={this.state.users}/>;
         }
 
         return(

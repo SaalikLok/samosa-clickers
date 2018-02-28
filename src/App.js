@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import EntryForm from './EntryForm';
 import Game from './Game';
 import Leaderboard from './Leaderboard';
+import base from './base.js';
 import './style/style.min.css';
 
 class App extends Component {
@@ -17,6 +18,10 @@ class App extends Component {
         this.addUser = this.addUser.bind(this);
         //this.changeComp = this.changeComp(this);
         //this.addScore = this.addScore(this);
+    }
+
+    componentWillMount(){
+        this.ref = base.synState();
     }
 
     addUser(users){

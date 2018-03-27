@@ -6,16 +6,10 @@ import './style/style.min.css';
 //const semiCircle = ProgressBar.SemiCircle; 
 
 class Game extends Component{
-    constructor(props){
-        super(props);
 
-        this.addScore = this.addScore.bind(this);
-        this.increase = this.increase.bind(this);
-
-        this.state= {
-            'time': 30,
-            'gameScore': 0
-        }
+    state= {
+        'time': 30,
+        'gameScore': 0
     }
 
     componentDidMount(){

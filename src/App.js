@@ -5,21 +5,13 @@ import Leaderboard from './Leaderboard';
 import './style/style.min.css';
 
 class App extends Component {
-    constructor(){
-        super();
-    
-        this.state = {
-          heading: 'Samosa Clickers',
-          users: {},
-          comp: 'start',
-        }
-
-        this.addUser = this.addUser.bind(this);
-        //this.changeComp = this.changeComp(this);
-        //this.addScore = this.addScore(this);
+    state = {
+        heading: 'Samosa Clickers',
+        users: {},
+        comp: 'start',
     }
 
-    addUser(users){
+    addUser = (users) => {
         //const users = {...this.state.users};
         this.setState({ users });
     }

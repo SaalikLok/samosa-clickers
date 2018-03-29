@@ -8,7 +8,7 @@ import './style/style.min.css';
 class Game extends Component{
 
     state= {
-        'time': 30,
+        'time': 5,
         'gameScore': 0
     }
 
@@ -25,10 +25,6 @@ class Game extends Component{
       }
     
     goToLeader = () => {
-        this.setState({
-            'time': 30,
-            'gameScore':0
-        });
         this.props.change("leaderboard", "Leaderboard");
     }
 

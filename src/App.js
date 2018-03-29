@@ -42,7 +42,7 @@ class App extends Component {
            compToRender = <Game setScore={this.setScore} change={this.changeComp}/>;
         }
         else{
-            compToRender = <Leaderboard users={this.state.users} change={this.changeComp}/>;
+            compToRender = <Leaderboard users={this.state.users}/>;
         }
 
         return(

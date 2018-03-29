@@ -12,7 +12,7 @@ class Leaderboard extends Component{
                 <h2>Who's winning?</h2>
                 <br/>
                 <Leader name={this.props.users.uname} score={this.props.users.score} />
-                <button onClick={() => this.props.change('start', "Samosa Slingers")}>Play Again</button>
+                <button onClick={() => {window.location.reload()}}>Play Again</button>
             </div>
         );
     }

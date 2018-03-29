@@ -16,7 +16,6 @@ class App extends Component {
         this.setState({ users });
     }
 
-
     setScore = (gameScore) => {
         this.setState(prevState => ({
             users:{
@@ -43,7 +42,7 @@ class App extends Component {
            compToRender = <Game setScore={this.setScore} change={this.changeComp}/>;
         }
         else{
-            compToRender = <Leaderboard users={this.state.users}/>;
+            compToRender = <Leaderboard users={this.state.users} change={this.changeComp}/>;
         }
 
         return(

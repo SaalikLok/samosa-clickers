@@ -25,17 +25,21 @@ class Game extends Component{
       }
     
     goToLeader = () => {
-        this.props.change("leaderboard", "Leaderboard")
+        this.setState({
+            'time': 30,
+            'gameScore':0
+        });
+        this.props.change("leaderboard", "Leaderboard");
     }
 
     increase = () => {
         if (this.state.time > 0){
             this.setState({
-                time: this.state.time - 1
+                'time': this.state.time - 1
             });
         }
         else{
-            this.goToLeader()
+            this.goToLeader();
         }
     }
 

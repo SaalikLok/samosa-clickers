@@ -10,5 +10,5 @@ const client = new ApolloClient({
     uri: "https://api.graph.cool/simple/v1/cjf9sd3pe129901855epolhqc"
   });
 
-ReactDOM.render(<ApolloProvider><App /></ApolloProvider>, document.getElementById('root'));
+ReactDOM.render(<ApolloProvider client={client}><App /></ApolloProvider>, document.getElementById('root'));
 registerServiceWorker();

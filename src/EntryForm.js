@@ -26,7 +26,7 @@ class EntryForm extends Component{
     createUser = (event) => {
         event.preventDefault();
 
-        if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,4})+$/.test(this.email.value)){
+        if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,4})+$/.test(this.email.value) && this.uname.value.length > 0){
             const user = {
                 uname: this.uname.value.trim(),
                 email: this.email.value.trim(),
@@ -35,8 +35,17 @@ class EntryForm extends Component{
             this.props.addUser(user);
             this.playGame(user);
         }
+        else if(this.email.value === "" && this.uname.value.length > 0){
+            const user = {
+                uname: this.uname.value.trim(),
+                email: "none",
+                score: 0,
+            };
+            this.props.addUser(user);
+            this.playGame(user);
+        }
         else{
-            alert("incorrect email.")
+            alert("You might be missing your name or have an incorrect email.")
         }
     }
 
@@ -48,7 +57,7 @@ class EntryForm extends Component{
                 <form>
                     <input ref={(input) => this.uname = input}  type="text" placeholder="Name"/>
                     <br/>
-                    <input ref={(input) => this.email = input} type="text" placeholder="Email"/>
+                    <input ref={(input) => this.email = input} type="text" placeholder="Email (optional)"/>
                     <br/>
                     <button type="submit">Play</button>
                 </form>

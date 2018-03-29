@@ -1,19 +1,29 @@
 import React, {Component} from 'react';
 import './style/style.min.css';
+import gql from 'graphql-tag';
+import {Mutation} from 'react-apollo';
 
+//TODO: Onclick of the button in the form, run the mutation.
+
+const startTime = new Date(Date.now()).toISOString();
+
+const CREATE_USER = gql`
+    mutation createUser($email: String!, $name: String!){
+        createUser(email: $email, name: $name, lastUpdated: startTime, score: 0){
+            id
+            email
+            name
+            score
+            lastUpdated
+        }
+    }`
 
 class EntryForm extends Component{
-    constructor(props){
-        super(props);
-
-        this.playGame = this.playGame.bind(this);
-    }
-
-    playGame(){
+    playGame = () => {
         this.props.change("game", "Samosa Clickers");
     }
 
-    createUser(event){
+    createUser = (event) => {
         event.preventDefault();
 
         if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,4})+$/.test(this.email.value)){
@@ -34,7 +44,7 @@ class EntryForm extends Component{
         return(
             <div className="formArea" onSubmit={(e) => this.createUser(e)}>
                 <h3>Click on the samosa as many times as possible in a minute!</h3>
-                <p>Played before? Use the same email and your high score will update.</p>
+                <p>Your email is used to let you know that you've won something cool!</p>
                 <form>
                     <input ref={(input) => this.uname = input}  type="text" placeholder="Name"/>
                     <br/>

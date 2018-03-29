@@ -4,6 +4,7 @@ import Game from './Game';
 import Leaderboard from './Leaderboard';
 import './style/style.min.css';
 
+
 class App extends Component {
     state = {
         heading: 'Samosa Clickers',

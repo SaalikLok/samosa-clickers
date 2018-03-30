@@ -3,13 +3,11 @@ import './style/style.min.css';
 import gql from 'graphql-tag';
 import {Mutation} from 'react-apollo';
 
-//TODO: Onclick of the button in the form, run the mutation.
-
 const startTime = new Date(Date.now()).toISOString();
 
 const CREATE_USER = gql`
-    mutation createUser($email: String!, $name: String!){
-        createUser(email: $email, name: $name, lastUpdated: startTime, score: 0){
+    mutation createUser($email: String!, $name: String!, $startTime: DateTime!){
+        createUser(email: $email, name: $name, lastUpdated: $startTime, score: 0){
             id
             email
             name
@@ -23,25 +21,26 @@ class EntryForm extends Component{
         this.props.change("game", "Samosa Clickers");
     }
 
-    createUser = (event) => {
-        event.preventDefault();
-
+    createUserFunc = (event, createUser) => {
         if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,4})+$/.test(this.email.value) && this.uname.value.length > 0){
             const user = {
                 uname: this.uname.value.trim(),
                 email: this.email.value.trim(),
-                score: 0,
+                score: 0
             };
             this.props.addUser(user);
+            createUser({variables: {email: this.email.value.trim(), name: this.uname.value.trim(), startTime: startTime}})
             this.playGame(user);
         }
         else if(this.email.value === "" && this.uname.value.length > 0){
             const user = {
                 uname: this.uname.value.trim(),
                 email: "none",
-                score: 0,
+                score: 0
             };
+            
             this.props.addUser(user);
+            createUser({variables: {email: "none", name: this.uname.value.trim(), startTime: startTime}})            
             this.playGame(user);
         }
         else{
@@ -51,7 +50,12 @@ class EntryForm extends Component{
 
     render(){
         return(
-            <div className="formArea" onSubmit={(e) => this.createUser(e)}>
+            <Mutation mutation={CREATE_USER}>
+            {(createUser, {data}) => (
+                <div className="formArea" onSubmit={(e) => {
+                 e.preventDefault();
+                 this.createUserFunc(e, createUser);   
+                }}>
                 <h3>Click on the samosa as many times as possible in a minute!</h3>
                 <p>Your email is used to let you know that you've won something cool!</p>
                 <form>
@@ -61,8 +65,9 @@ class EntryForm extends Component{
                     <br/>
                     <button type="submit">Play</button>
                 </form>
-                
             </div>
+            )}
+            </Mutation>
         );
     }   
 }

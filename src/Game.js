@@ -1,9 +1,20 @@
 import React, {Component} from 'react';
-//import ProgressBar from 'react-progressbar.js';
 import './style/style.min.css';
+import gql from 'graphql-tag';
+import {Mutation} from 'react-apollo';
 
+const startTime = new Date(Date.now()).toISOString();
 
-//const semiCircle = ProgressBar.SemiCircle; 
+const CREATE_USER = gql`
+    mutation createUser($email: String!, $name: String!, $startTime: DateTime!, $score: Int!){
+        createUser(email: $email, name: $name, lastUpdated: $startTime, score: $score){
+            id
+            email
+            name
+            score
+            lastUpdated
+        }
+    }`
 
 class Game extends Component{
 
@@ -35,18 +46,33 @@ class Game extends Component{
             });
         }
         else{
-            this.goToLeader();
+            this.setState({
+                'time': 0
+            });
+            //Make samosa unclickable
         }
+    }
+
+    createUserFunc = (createUser) => {
+        createUser({variables: {email: this.props.users.email, name: this.props.users.uname, startTime: startTime, score: this.state.gameScore}});             
     }
 
     render(){
         return(
-            <div className="gameComp">
-                <p className="score">{this.state.gameScore}</p>
-                <p className="time"> Samosas Made</p>
-                <div className="samosa" onClick={this.addScore}/>
-                <p className="time">{this.state.time} secs</p>        
-            </div>
+            <Mutation mutation={CREATE_USER}>
+                {(createUser, {data}) => (
+                <div id="gameForm" className="gameComp">
+                    <p className="score">{this.state.gameScore}</p>
+                    <p className="time"> Samosas Made</p>
+                    <div className="samosa" onClick={this.addScore}/>
+                    <p className="time">{this.state.time} secs</p>    
+                    <button onClick={() => {
+                        this.createUserFunc(createUser);
+                        this.goToLeader();
+                    }}>Done</button>    
+                </div>
+            )}
+            </Mutation>
         );
     }
 }

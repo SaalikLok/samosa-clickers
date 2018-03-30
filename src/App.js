@@ -40,7 +40,7 @@ class App extends Component {
             compToRender = <EntryForm change={this.changeComp} addUser={this.addUser}/>; 
         }
         else if(this.state.comp === 'game'){
-           compToRender = <Game setScore={this.setScore} change={this.changeComp}/>;
+           compToRender = <Game setScore={this.setScore} change={this.changeComp} users={this.state.users}/>;
         }
         else{
             compToRender = <Leaderboard users={this.state.users}/>;

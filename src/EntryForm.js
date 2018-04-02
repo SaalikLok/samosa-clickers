@@ -3,46 +3,50 @@ import './style/style.min.css';
 
 
 class EntryForm extends Component{
-    constructor(props){
-        super(props);
-
-        this.playGame = this.playGame.bind(this);
-    }
-
-    playGame(){
+    playGame = () => {
         this.props.change("game", "Samosa Clickers");
     }
 
-    createUser(event){
-        event.preventDefault();
-
-        if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,4})+$/.test(this.email.value)){
+    createUserFunc = (event) => {
+        if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,4})+$/.test(this.email.value) && this.uname.value.length > 0){
             const user = {
                 uname: this.uname.value.trim(),
                 email: this.email.value.trim(),
-                score: 0,
+                score: 0
             };
             this.props.addUser(user);
             this.playGame(user);
         }
+        else if(this.email.value === "" && this.uname.value.length > 0){
+            const user = {
+                uname: this.uname.value.trim(),
+                email: "none",
+                score: 0
+            };
+            
+            this.props.addUser(user);
+            this.playGame(user);
+        }
         else{
-            alert("incorrect email.")
+            alert("You might be missing your name or have an incorrect email.")
         }
     }
 
     render(){
         return(
-            <div className="formArea" onSubmit={(e) => this.createUser(e)}>
+            <div className="formArea" onSubmit={(e) => {
+                    e.preventDefault();
+                    this.createUserFunc(e);   
+                }}>
                 <h3>Click on the samosa as many times as possible in a minute!</h3>
-                <p>Played before? Use the same email and your high score will update.</p>
+                <p>Your email is used to let you know that you've won something cool!</p>
                 <form>
                     <input ref={(input) => this.uname = input}  type="text" placeholder="Name"/>
                     <br/>
-                    <input ref={(input) => this.email = input} type="text" placeholder="Email"/>
+                    <input ref={(input) => this.email = input} type="text" placeholder="Email (optional)"/>
                     <br/>
                     <button type="submit">Play</button>
                 </form>
-                
             </div>
         );
     }   

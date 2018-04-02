@@ -4,26 +4,18 @@ import Game from './Game';
 import Leaderboard from './Leaderboard';
 import './style/style.min.css';
 
-class App extends Component {
-    constructor(){
-        super();
-    
-        this.state = {
-          heading: 'Samosa Clickers',
-          users: {},
-          comp: 'start',
-        }
 
-        this.addUser = this.addUser.bind(this);
-        //this.changeComp = this.changeComp(this);
-        //this.addScore = this.addScore(this);
+class App extends Component {
+    state = {
+        heading: 'Samosa Clickers',
+        users: {},
+        comp: 'start',
     }
 
-    addUser(users){
+    addUser = (users) => {
         //const users = {...this.state.users};
         this.setState({ users });
     }
-
 
     setScore = (gameScore) => {
         this.setState(prevState => ({
@@ -48,7 +40,7 @@ class App extends Component {
             compToRender = <EntryForm change={this.changeComp} addUser={this.addUser}/>; 
         }
         else if(this.state.comp === 'game'){
-           compToRender = <Game setScore={this.setScore} change={this.changeComp}/>;
+           compToRender = <Game setScore={this.setScore} change={this.changeComp} users={this.state.users}/>;
         }
         else{
             compToRender = <Leaderboard users={this.state.users}/>;

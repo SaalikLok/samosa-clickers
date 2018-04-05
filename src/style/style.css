@@ -15,6 +15,10 @@ h1 {
   font-size: 3em;
 }
 
+a {
+  color: #0073BB;
+}
+
 input {
   font-size: 1.3em;
   margin-bottom: 5vh;
@@ -39,6 +43,7 @@ button {
   -moz-box-shadow: 0 0 20px rgba(255, 255, 255, 0) inset;
   box-shadow: 0 0 20px rgba(255, 255, 255, 0) inset;
   font-family: "Quicksand", sans-serif;
+  margin-bottom: 10px;
 }
 
 button:hover {
@@ -66,7 +71,38 @@ button:hover {
   width: 250px;
   height: 200px;
   cursor: pointer;
+}
+
+.samosa:active {
+  -webkit-animation-duration: 1s;
+  -webkit-animation-name: samosaPulse;
+  -webkit-animation-timing-function: ease-out;
+  animation-duration: 1s;
+  animation-name: samosaPulse;
+  animation-timing-function: ease-out;
+  animation-play-state: running;
+}
+
+@keyframes samosaPulse {
+  0% {
+    background: url("../img/SamosaIcon.png") center no-repeat cover;
+    transform: scale(1);
+  }
+  60% {
+    background: url("../img/SamosaIcon.png") center no-repeat cover;
+    transform: scale(0.8);
+  }
+  100% {
+    background: url("../img/SamosaIcon.png") center no-repeat cover;
+    transform: scale(0.5);
+  }
+}
+
+.samosaContainer {
+  width: 250px;
+  height: 230px;
   margin: 0 auto;
+  display: block;
 }
 
 .leaderboard {
@@ -74,24 +110,10 @@ button:hover {
   margin-right: 15vw;
 }
 
-.lBar100, .lBar75, .lBar50 {
-  height: 30px;
-  background: #FFB366;
-  border-top-right-radius: 2em;
-  border-bottom-right-radius: 2em;
-  margin-top: 20px;
-  font-size: 20px;
-  color: #0073BB;
+.leader {
+  font-size: 1.3em;
 }
 
-.lBar100 {
-  width: 100%;
-}
-
-.lBar75 {
-  width: 75%;
-}
-
-.lBar50 {
-  width: 50%;
+.tinyText {
+  font-size: 0.8em;
 }

@@ -18,6 +18,15 @@ $yellow: #FFB366;
     box-shadow:$top $left $blur $color #{$inset};
   }
 
+@mixin animation($duration, $name, $animationTiming){
+    -webkit-animation-duration: $duration;
+    -webkit-animation-name: $name;
+    -webkit-animation-timing-function: $animationTiming;    
+    animation-duration: $duration;
+    animation-name: $name;
+    animation-timing-function: $animationTiming;
+}
+
 //Styles
 body{
     text-align: center;
@@ -33,6 +42,10 @@ h1{
     margin-top: 4vh;
     font-family: $heading;
     font-size: 3em;
+}
+
+a{
+    color: $blue;
 }
 
 input{
@@ -57,6 +70,7 @@ button{
     cursor: pointer;
     @include box-shadow(0, 0, 20px, rgba(255, 255, 255, 0), inset);
     font-family: $body;
+    margin-bottom: 10px;
 }
 
 button:hover{
@@ -84,7 +98,32 @@ button:hover{
     width: 250px;
     height: 200px;
     cursor: pointer;
+}
+.samosa:active{
+    @include animation(1s, samosaPulse, ease-out);
+    animation-play-state: running;
+}
+
+@keyframes samosaPulse{
+    0%{
+        background: url('../img/SamosaIcon.png') center no-repeat cover;
+        transform: scale(1)
+    }
+    60%{
+        background: url('../img/SamosaIcon.png') center no-repeat cover;
+        transform: scale(0.8)
+    }
+    100%{
+        background: url('../img/SamosaIcon.png') center no-repeat cover;
+        transform: scale(0.5)
+    }
+}
+
+.samosaContainer{
+    width: 250px;
+    height: 230px;
     margin: 0 auto;
+    display: block;
 }
 
 .leaderboard{
@@ -92,27 +131,10 @@ button:hover{
     margin-right: 15vw;
 }
 
-%lBar{
-    height: 30px;
-    background: $yellow;
-    border-top-right-radius: 2em;
-    border-bottom-right-radius: 2em;
-    margin-top: 20px;
-    font-size: 20px;
-    color: $blue;
+.leader{
+    font-size: 1.3em;
 }
 
-.lBar100{
-    @extend %lBar;
-    width: 100%;
-}
-
-.lBar75{
-    @extend %lBar;
-    width: 75%;
-}
-
-.lBar50{
-    @extend %lBar;
-    width: 50%;
+.tinyText{
+    font-size: 0.8em;
 }

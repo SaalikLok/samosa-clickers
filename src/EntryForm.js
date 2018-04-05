@@ -47,7 +47,12 @@ class EntryForm extends Component{
                     <br/>
                     <button type="submit">Play</button>
                 </form>
+                <footer>
+                    <p className="tinyText">Brought to you by <a target="blank" href="http://bit.ly/samosa-slingers">The Samosa Slingers</a> 
+                    <br/>Made by <a target="blank" href="https://www.saaliklok.com">Saalik Lokhandwala</a> &copy; 2018</p>
+                </footer>
             </div>
+            
         );
     }   
 }

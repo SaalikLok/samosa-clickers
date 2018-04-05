@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './style/style.min.css';
 
 const Leader = (props) => {

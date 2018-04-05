@@ -19,8 +19,9 @@ const CREATE_USER = gql`
 class Game extends Component{
 
     state= {
-        'time': 5,
-        'gameScore': 0
+        'time': 30,
+        'gameScore': 0,
+        'isPlaying': true
     }
 
     componentDidMount(){
@@ -28,11 +29,16 @@ class Game extends Component{
     }
 
     addScore = () => {
-        this.setState({
-            'gameScore': this.state.gameScore + 1
-        })
-
-        this.props.setScore(this.state.gameScore);
+        if(this.state.isPlaying){
+            this.setState({
+                'gameScore': this.state.gameScore + 1
+            })
+            this.props.setScore(this.state.gameScore);
+        }
+        else{
+            alert("You're out of time! Click the 'done' button below.")
+        }
+        
       }
     
     goToLeader = () => {
@@ -47,7 +53,8 @@ class Game extends Component{
         }
         else{
             this.setState({
-                'time': 0
+                'time': 0,
+                'isPlaying': false
             });
             //Make samosa unclickable
         }
@@ -64,7 +71,9 @@ class Game extends Component{
                 <div id="gameForm" className="gameComp">
                     <p className="score">{this.state.gameScore}</p>
                     <p className="time"> Samosas Made</p>
-                    <div className="samosa" onClick={this.addScore}/>
+                    <div className="samosaContainer">
+                        <div className="samosa" onClick={this.addScore}/>
+                    </div>
                     <p className="time">{this.state.time} secs</p>    
                     <button onClick={() => {
                         this.createUserFunc(createUser);

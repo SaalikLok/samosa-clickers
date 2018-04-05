@@ -50,6 +50,9 @@ class App extends Component {
         <div className="App" ref="myRef">
             <h1>{this.state.heading}</h1>
             {compToRender}
+            <footer>
+                <p className="tinyText">Made by <a href="https://www.saaliklok.com">Saalik Lokhandwala</a> &copy; 2018</p>
+            </footer>
         </div>
         );
     }

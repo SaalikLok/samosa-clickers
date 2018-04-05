@@ -38,7 +38,7 @@ class EntryForm extends Component{
                     e.preventDefault();
                     this.createUserFunc(e);   
                 }}>
-                <h3>Click on the samosa as many times as possible in a minute!</h3>
+                <h3>Click on the samosa as many times as possible in thirty seconds!</h3>
                 <p>Your email is used to let you know that you've won something cool!</p>
                 <form>
                     <input ref={(input) => this.uname = input}  type="text" placeholder="Name"/>

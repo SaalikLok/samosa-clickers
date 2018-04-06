@@ -42,8 +42,8 @@ class App extends Component {
         else if(this.state.comp === 'game'){
            compToRender = <Game setScore={this.setScore} change={this.changeComp} users={this.state.users}/>;
         }
-        else{
-            compToRender = <Leaderboard users={this.state.users}/>;
+        else if(this.state.comp === 'leaderboard'){
+            compToRender = <Leaderboard />;
         }
 
         return(

@@ -27,6 +27,13 @@ $yellow: #FFB366;
     animation-timing-function: $animationTiming;
 }
 
+@mixin no-user-select{
+    -khtml-user-select: none;
+    -o-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
 //Styles
 body{
     text-align: center;
@@ -94,12 +101,13 @@ button:hover{
 }
 
 .samosa{
+    @include no-user-select();
     background: url('../img/SamosaIcon.png') center no-repeat;
     width: 250px;
     height: 200px;
-    cursor: pointer;
 }
 .samosa:active{
+    @include no-user-select();
     @include animation(1s, samosaPulse, ease-out);
     animation-play-state: running;
 }
@@ -111,15 +119,16 @@ button:hover{
     }
     60%{
         background: url('../img/SamosaIcon.png') center no-repeat cover;
-        transform: scale(0.8)
+        transform: scale(0.93)
     }
     100%{
         background: url('../img/SamosaIcon.png') center no-repeat cover;
-        transform: scale(0.5)
+        transform: scale(0.85)
     }
 }
 
 .samosaContainer{
+    @include no-user-select();
     width: 250px;
     height: 230px;
     margin: 0 auto;

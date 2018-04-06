@@ -24,7 +24,7 @@ const Leaderboard = (props, {onGetLeaders}) => (
                 if(error) return `Error: ${error.message}`;
 
                 return(
-                    <div className="leaderboard" onLoad={onGetLeaders}>
+                    <div className="leaderboard" onClick={onGetLeaders}>
                         <h2>Who's winning?</h2>
                         <br/>
                         {data.allUsers.map(user => (

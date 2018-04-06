@@ -42,7 +42,7 @@ class Game extends Component{
       }
     
     goToLeader = () => {
-        this.props.change("leaderboard", "Leaderboard");
+        this.props.change('leaderboard', "Leaderboard");
     }
 
     increase = () => {
@@ -61,7 +61,8 @@ class Game extends Component{
     }
 
     createUserFunc = (createUser) => {
-        createUser({variables: {email: this.props.users.email, name: this.props.users.uname, startTime: startTime, score: this.state.gameScore}});             
+        createUser({variables: {email: this.props.users.email, name: this.props.users.uname, startTime: startTime, score: this.state.gameScore}});
+        this.goToLeader();                     
     }
 
     render(){
@@ -77,7 +78,6 @@ class Game extends Component{
                     <p className="time">{this.state.time} secs</p>    
                     <button onClick={() => {
                         this.createUserFunc(createUser);
-                        this.goToLeader();
                     }}>Done</button>    
                 </div>
             )}
